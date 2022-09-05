@@ -12,6 +12,9 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
+RUN rm client.py
+RUN rm -rf ./images
+
 RUN chmod +x entrypoint.sh
 
 CMD [ "sh", "./entrypoint.sh"]

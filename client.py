@@ -8,6 +8,7 @@ from IPython.display import Image, display
 base_url = "http://localhost:3000"
 endpoint = "/predict"
 model = "yolov3-tiny"
+model = "yolov3"
 
 full_url = base_url + endpoint + "?model=" + model
 
@@ -44,11 +45,13 @@ def display_image_from_response(response):
     """
     image_stream = io.BytesIO(response.content)
     image_stream.seek(0)
+    print(image_stream.read())
+    image_stream.seek(0)
     file_bytes = np.asarray(bytearray(image_stream.read()), dtype=np.uint8)
     image = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
     filename = "image_with_objects.jpeg"
     cv2.imwrite(f"images_predicted/{filename}", image)
-    display(Image(f"images_predicted/{filename}"))
+    # display(Image(f"images_predicted/{filename}"))
 
 
 dir_name = "images_predicted"
@@ -63,7 +66,7 @@ if not os.path.exists(dir_name):
 
 #     display_image_from_response(prediction)
 
-with open("images/clock2.jpg", "rb") as image_file:
+with open("images/minicop.jpeg", "rb") as image_file:
     prediction = response_from_server(full_url, image_file)
 
 display_image_from_response(prediction)
