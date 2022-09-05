@@ -28,7 +28,7 @@ class Model(str, Enum):
 # By using @app.get("/") you are allowing the GET method to work for the / endpoint.
 @app.get("/")
 def home():
-    return "Congratulations! Your API is working as expected. Now head over to http://localhost:8000/docs."
+    return "Congratulations! Your API is working as expected. Now head over to http://localhost:3000/docs."
 
 
 # This endpoint handles all the logic necessary for the object detection to work.
@@ -77,10 +77,15 @@ def prediction(model: Model, file: UploadFile = File(...)):
 
 
 # Allows the server to be run in this interactive environment
-nest_asyncio.apply()
+# nest_asyncio.apply()
 
 # Host depends on the setup you selected (docker or virtual env)
-host = "0.0.0.0"  # "127.0.0.1"
+host = "0.0.0.0"
+# host = "127.0.0.1"
 
 # Spin up the server!
-uvicorn.run(app, host=host, port=8000)
+uvicorn.run(app, host=host, port=3000)
+
+# while True:
+#     continue
+
